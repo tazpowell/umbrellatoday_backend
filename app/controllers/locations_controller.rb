@@ -1,16 +1,16 @@
-class LocationsController < OpenReadController
-  before_action :set_location, only: %i[update destroy]
+class LocationsController < ProtectedController
+  before_action :set_location, only: %i[show update destroy]
 
   # GET /locations
   def index
-    @locations = Location.all
+    @locations = current_user.locations.all
 
     render json: @locations
   end
 
   # GET /locations/1
   def show
-    render json: Location.find(params[:id])
+    render json: @location
   end
 
   # POST /locations
@@ -18,7 +18,7 @@ class LocationsController < OpenReadController
     @location = current_user.locations.build(location_params)
 
     if @location.save
-      render json: @location, status: :created
+      render json: @location, status: :created, location: @location
     else
       render json: @location.errors, status: :unprocessable_entity
     end

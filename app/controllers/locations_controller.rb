@@ -1,5 +1,5 @@
-class LocationsController < ApplicationController
-  before_action :set_location, only: [:show, :update, :destroy]
+class LocationsController < OpenReadController
+  before_action :set_location, only: %i[update destroy]
 
   # GET /locations
   def index
@@ -10,15 +10,15 @@ class LocationsController < ApplicationController
 
   # GET /locations/1
   def show
-    render json: @location
+    render json: Location.find(params[:id])
   end
 
   # POST /locations
   def create
-    @location = Location.new(location_params)
+    @location = current_user.locations.build(location_params)
 
     if @location.save
-      render json: @location, status: :created, location: @location
+      render json: @location, status: :created
     else
       render json: @location.errors, status: :unprocessable_entity
     end
@@ -41,7 +41,7 @@ class LocationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_location
-      @location = Location.find(params[:id])
+      @location = current_user.locations.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.

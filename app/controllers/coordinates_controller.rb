@@ -3,9 +3,10 @@ class CoordinatesController < ApplicationController
 
   # GET /coordinates
   def index
-    name = params['name']
+    name = params['query']['name']
+    region = params['query']['region']
     # ?locate=Boston&json=1
-    @coordinates = HTTParty.get("https://geocoder.ca/?locate=#{name}&json=1&standard=1&topmatches=1&strictmode=1")
+    @coordinates = HTTParty.get("https://geocode.xyz/?locate=#{name}&region=#{region}&json=1&strictmode=1")
     render json: @coordinates
   end
 

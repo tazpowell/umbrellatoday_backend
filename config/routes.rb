@@ -3,6 +3,7 @@
 Rails.application.routes.draw do
   # RESTful routes
   # resources :forecasts, except: %i[new edit]
+  # resources :coordinates
   resources :locations, except: %i[new edit]
   resources :examples, except: %i[new edit]
   resources :users, only: %i[index show update]
@@ -13,4 +14,5 @@ Rails.application.routes.draw do
   delete '/sign-out' => 'users#signout'
   patch '/change-password' => 'users#changepw'
   get '/forecasts' => 'forecasts#index'
+  get '/coordinates' => 'coordinates#index'
 end

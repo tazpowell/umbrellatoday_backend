@@ -8,6 +8,8 @@ curl "http://localhost:4741/locations/${ID}" \
   --data '{
     "location": {
       "name": "'"${NAME}"'",
+      "lat": "'"${LAT}"'",
+      "long": "'"${LONG}"'",
       "default": "'"${DEFAULT}"'"
     }
   }'

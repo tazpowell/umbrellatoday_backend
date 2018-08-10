@@ -5,10 +5,13 @@
 
 ## Back-end
 This repo is the back-end for my UmbrellaToday web app.
-It uses weather data to determine if you need to bring an umbrella with you today.
+It uses weather data from [DarkSky's API](https://darksky.net/dev/docs) to determine if you need to bring an umbrella with you today. Lat/long data for a location is obtained though forward geocoding via https://geocode.xyz/ API.
+
+Unregistered users can look up weather info based on location name or lat/long values.
+Registered users can add locations into a saved list if they provide location name, latitude, and longitude values.
 
 ## Technologies
-Ruby, Ruby on Rails
+Ruby, Ruby on Rails, PostgreSQL
 
 ## Development Process
 #### Planning
@@ -328,7 +331,7 @@ Content-Type: application/json; charset=utf-8
 Request:
 
 ```sh
-curl "https://floating-earth-61602.herokuapp.com/forecasts" \
+curl "https://floating-earth-61602.herokuapp.com/coordinates" \
   --include \
   --request GET \
   --header "Content-Type: application/json" \
